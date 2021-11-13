@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div>
+    <p>
+      {{object.title}}
+    </p>
+    <p>
+      {{object.content}}
+    </p>
+
+    <img src="/media/{{object.image}}" alt="">
+  </div>
+{% endblock content %}
