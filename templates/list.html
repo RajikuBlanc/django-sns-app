@@ -27,12 +27,15 @@
     {% endif %}
   </div>
   <div>
+    {% comment %} ログインしているユーザー以外に表示 {% endcomment %}
+    {% if item.user != request.user %}
     {% if item.user in connection.0.following.all %}
-    <a href="{% url 'follow-home' item.pk %}">
-      フォロー解除</a>
+    <a href="{% url 'follow-home' item.pk %}" class="btn btn-danger ms-3" tabindex="-1" role="button"
+      aria-disabled="true">フォロー解除</a>
     {% else %}
-    <a href="{% url 'follow-home' item.pk %}">
-      フォロー</a>
+    <a href="{% url 'follow-home' item.pk %}" class="btn btn-primary ms-3" tabindex="-1" role="button"
+      aria-disabled="true">フォロー</a>
+    {% endif %}
     {% endif %}
   </div>
   {% endfor %}
