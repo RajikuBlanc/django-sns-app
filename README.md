@@ -1,6 +1,6 @@
 # django-sns-app
 
-##実装機能
+## 実装機能
 - 認証機能(django-allauth)
 - いいね機能
 - フォロー機能
