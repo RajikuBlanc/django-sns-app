@@ -1,15 +1,46 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
-  <div>
-    <p>
-      {{object.title}}
-    </p>
-    <p>
-      {{object.content}}
-    </p>
+<div>
+  <p>
+    {{object.title}}
+  </p>
+  <p>
+    {{object.content}}
+  </p>
 
-    <img src="/media/{{object.image}}" alt="">
+  <img src="/media/{{object.image}}" alt="" />
+
+  {% if object.user == request.user %}
+  <a href="{% url 'update' object.pk %}">編集</a>
+  {% endif %}
+
+  {% if object.user == request.user %}
+  <a href="{% url 'delete' object.pk %}">削除</a>
+  {% endif %}
+  <div>
+    {% if request.user in object.like.all%}
+    <a href="{% url 'like-detail' object.pk %}">
+      いいねを外す</a>
+    <p>
+      {{object.like.count}}
+    </p>
+    {% else %}
+    <a href="{% url 'like-detail' object.pk %}">
+      いいねする</a>
+    <p>
+      {{object.like.count}}
+    </p>
+    {% endif %}
+    <div>
+      {% if object.user in connection.0.following.all %}
+      <a href="{% url 'follow-detail' object.pk %}">
+        フォロー解除</a>
+      {% else %}
+      <a href="{% url 'follow-detail' object.pk %}">
+        フォロー</a>
+      {% endif %}
+    </div>
   </div>
+</div>
 {% endblock content %}

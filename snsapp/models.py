@@ -7,6 +7,7 @@ class Post(models.Model):
     content = models.TextField()
     image = models.ImageField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    like = models.ManyToManyField(User,related_name="related_post",blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -14,3 +15,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+class Connection(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    following = models.ManyToManyField(User, related_name='following', blank=True)
+
+    def __str__(self):
+        return self.user.username
